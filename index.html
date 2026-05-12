@@ -1,0 +1,326 @@
+
+
+
+<link href="/Content/home/css/main.css" rel="stylesheet" />
+<script src="/Content/js/jquery.min.js"></script>
+<title>廊坊益津检测技术有限公司</title>
+<style>
+    body {
+        background-color: #eff8ff;
+    }
+
+    .maincontent {
+        background-color: white;
+        margin: 20px auto;
+        width: 90%;
+        min-width: 1000px;
+        border-top: 2px solid #0082df;
+    }
+
+    .maintitle {
+        background-color: #e0efff;
+        font-weight: bolder;
+        height: 55px;
+        line-height: 55px;
+        padding-left: 5px;
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    .tablecontent {
+        margin: 10px;
+        padding-top: 10px;
+    }
+
+    .tabletitle {
+        margin: 10px auto;
+        color: #076cb4;
+    }
+
+    .maintable {
+        font-size: 13px;
+        font-family: 'Microsoft yahei';
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        border: 1px solid #ffffff;
+        font-weight: lighter;
+    }
+
+        .maintable tr:hover {
+            background-color: #dddddd;
+        }
+
+        .maintable th {
+            font-family: 'Microsoft yahei';
+            background-color: #fafafa;
+            border: 1px solid #dddddd;
+            color: #2b7dbc;
+            padding: 5px;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .maintable td {
+            font-family: 'Microsoft yahei';
+            background-color: white;
+            border: 1px solid #dddddd;
+            padding: 5px;
+            text-align: left;
+            min-width: 80px;
+        }
+</style>
+<script>
+    $(function () {
+         if ('LFYJ20241251') {
+            watermark({ watermark_txt: '报告号：' + 'LFYJ20241251' });
+        }
+    });
+
+        //设置水印
+        function watermark(settings) {
+            //默认设置
+            var defaultSettings = {
+                watermark_txt: "text",
+                watermark_x: 100, //水印起始位置x轴坐标
+                watermark_y: 100, //水印起始位置Y轴坐标
+                watermark_rows: 2, //水印行数
+                watermark_cols: 4, //水印列数
+                watermark_x_space: 100, //水印x轴间隔
+                watermark_y_space: 50, //水印y轴间隔
+                watermark_color: '#aaa', //水印字体颜色
+                watermark_alpha: 0.4, //水印透明度
+                watermark_fontsize: '24px', //水印字体大小
+                watermark_font: '微软雅黑', //水印字体
+                watermark_width: 300, //水印宽度
+                watermark_height: 200, //水印高度
+                watermark_angle: 20 //水印倾斜度数
+            };
+            if (arguments.length === 1 && typeof arguments[0] === "object") {
+                var src = arguments[0] || {};
+                for (key in src) {
+                    if (src[key] && defaultSettings[key] && src[key] === defaultSettings[key]) continue;
+                    else if (src[key]) defaultSettings[key] = src[key];
+                }
+            }
+            var oTemp = document.createDocumentFragment();
+            //获取页面最大宽度
+            var page_width = Math.max(document.body.scrollWidth, document.body.clientWidth);
+            var cutWidth = page_width * 0.0150;
+            var page_width = page_width - cutWidth;
+            //获取页面最大高度
+            var page_height = Math.max(document.body.scrollHeight, document.body.clientHeight) + 450;
+            page_height = Math.max(page_height, window.innerHeight - 30);
+            //如果将水印列数设置为0，或水印列数设置过大，超过页面最大宽度，则重新计算水印列数和水印x轴间隔
+            if (defaultSettings.watermark_cols == 0 || (parseInt(defaultSettings.watermark_x + defaultSettings.watermark_width * defaultSettings.watermark_cols + defaultSettings.watermark_x_space * (defaultSettings.watermark_cols - 1)) > page_width)) {
+                defaultSettings.watermark_cols = parseInt((page_width - defaultSettings.watermark_x + defaultSettings.watermark_x_space) / (defaultSettings.watermark_width + defaultSettings.watermark_x_space));
+                defaultSettings.watermark_x_space = parseInt((page_width - defaultSettings.watermark_x - defaultSettings.watermark_width * defaultSettings.watermark_cols) / (defaultSettings.watermark_cols - 1));
+            }
+            //如果将水印行数设置为0，或水印行数设置过大，超过页面最大长度，则重新计算水印行数和水印y轴间隔
+            if (defaultSettings.watermark_rows == 0 || (parseInt(defaultSettings.watermark_y + defaultSettings.watermark_height * defaultSettings.watermark_rows + defaultSettings.watermark_y_space * (defaultSettings.watermark_rows - 1)) > page_height)) {
+                defaultSettings.watermark_rows = parseInt((defaultSettings.watermark_y_space + page_height - defaultSettings.watermark_y) / (defaultSettings.watermark_height + defaultSettings.watermark_y_space));
+                defaultSettings.watermark_y_space = parseInt(((page_height - defaultSettings.watermark_y) - defaultSettings.watermark_height * defaultSettings.watermark_rows) / (defaultSettings.watermark_rows - 1));
+            }
+            var x;
+            var y;
+            for (var i = 0; i < defaultSettings.watermark_rows; i++) {
+                y = defaultSettings.watermark_y + (defaultSettings.watermark_y_space + defaultSettings.watermark_height) * i;
+                for (var j = 0; j < defaultSettings.watermark_cols; j++) {
+                    x = defaultSettings.watermark_x + (defaultSettings.watermark_width + defaultSettings.watermark_x_space) * j;
+                    var mask_div = document.createElement('div');
+                    mask_div.id = 'mask_div' + i + j;
+                    mask_div.className = 'mask_div';
+                    mask_div.appendChild(document.createTextNode(defaultSettings.watermark_txt));
+                    //设置水印div倾斜显示
+                    mask_div.style.webkitTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                    mask_div.style.MozTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                    mask_div.style.msTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                    mask_div.style.OTransform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                    mask_div.style.transform = "rotate(-" + defaultSettings.watermark_angle + "deg)";
+                    mask_div.style.visibility = "";
+                    mask_div.style.position = "absolute";
+                    mask_div.style.left = x + 'px';
+                    mask_div.style.top = y + 'px';
+                    mask_div.style.overflow = "hidden";
+                    mask_div.style.zIndex = "9999";
+                    //让水印不遮挡页面的点击事件
+                    mask_div.style.pointerEvents = 'none';
+                    mask_div.style.opacity = defaultSettings.watermark_alpha;
+                    mask_div.style.fontSize = defaultSettings.watermark_fontsize;
+                    mask_div.style.fontFamily = defaultSettings.watermark_font;
+                    mask_div.style.color = defaultSettings.watermark_color;
+                    mask_div.style.textAlign = "center";
+                    mask_div.style.width = defaultSettings.watermark_width + 'px';
+                    mask_div.style.height = defaultSettings.watermark_height + 'px';
+                    mask_div.style.display = "block";
+                    oTemp.appendChild(mask_div);
+                };
+            };
+            document.body.appendChild(oTemp);
+        }
+</script>
+<div class="header">
+    <div class="HeaderTop">
+        <div class="cmain">
+           
+        </div>
+    </div>
+    <div class="HeaderBot">
+        <div class="cmain">
+            <div class="logo"><img src="/img/logoico.png" height="60" width="60" alt="" style="margin-top:-7px;" /></div>
+            <div class="logo">
+                <span style="float:left; color:#258edf;  font-size:36px; font-weight:800; ">河北省生态环境监测机构监管平台</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="maincontent">
+
+    <div class="maintitle" style="text-align:center;">
+        霸州市白泽户外用品有限公司 - wt20241251
+    </div>
+    <div class="content">
+        <div class="tablecontent">
+            <div class="tabletitle">
+                <span style="font-size:12px;padding-right:5px;float:left; opacity:0.3">▶&nbsp;&nbsp;</span>监测任务信息
+            </div>
+            <div class="tablediv">
+                <table class="maintable" style="margin:auto;">
+
+                    <tr>
+                        <th style="width:15%;"><b>报告号：</b></th>
+                        <td style="width:35%;">LFYJ20241251</td>
+                        <th style="width:15%;"><b>项目名称：</b></th>
+                        <td style="width:35%;">霸州市白泽户外用品有限公司</td>
+                    </tr>
+                    <tr>
+                        <th><b>计划开始时间：</b></th>
+                        <td>2026/3/4 0:00:00</td>
+                        <th><b>计划结束时间：</b></th>
+                        <td>2026/5/4 0:00:00</td>
+                    </tr>
+                    <tr>
+                        <th>报告签发时间：</th>
+                        <td colspan="3">2026/3/14 0:00:00</td>
+                    </tr>
+                    <tr>
+                        <th><b>任务性质：</b></th>
+                        <td>环境监测</td>
+                        <th><b>检测类型：</b></th>
+                        <td>生态环境质量监测</td>
+                    </tr>
+                    <tr>
+                        <th><b>样品来源：</b></th>
+                        <td>采样</td>
+                        <th><b>任务来源：</b></th>
+                        <td>社会委托</td>
+                    </tr>
+                    <tr>
+                        <th><b>检测目的：</b></th>
+                        <td></td>
+                        <th><b>检测需求：</b></th>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+                        <th><b>委托单位名称：</b></th>
+                        <td>霸州市白泽户外用品有限公司</td>
+                        <th><b>委托单位地址：</b></th>
+                        <td>河北省廊坊市霸州市胜芳镇西董家堡村</td>
+                    </tr>
+                    <tr>
+                        <th><b>委托单位联系人：</b></th>
+                        
+                        <td>*</td>
+                        <th><b>委托单位联系电话：</b></th>
+                        
+                        <td>*</td>
+                    </tr>
+                    <tr>
+                        <th><b>委托单位邮箱：</b></th>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <th><b>受检单位名称：</b></th>
+                        <td>霸州市白泽户外用品有限公司</td>
+                        <th><b>受检单位地址：</b></th>
+                        <td>河北省廊坊市霸州市胜芳镇西董家堡村</td>
+                    </tr>
+                    <tr>
+                        <th><b>受检单位联系人：</b></th>
+                        
+                        <td>*</td>
+                        <th><b>受检单位联系电话：</b></th>
+                        
+                        <td>*</td>
+                    </tr>
+                    <tr>
+                        <th><b>受检单位邮箱：</b></th>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <th><b>备注：</b></th>
+                        <td colspan="3"></td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="tablecontent">
+            <div class="tabletitle">
+                <span style="font-size:12px;padding-right:5px;float:left; opacity:0.3">▶&nbsp;&nbsp;</span>监测机构信息
+            </div>
+            <div class="tablediv">
+                <table class="maintable" style="margin:auto;">
+
+                    <tr>
+                        <th><b>机构登记码：</b></th>
+                        <td>3001</td>
+                        <th><b>机构名称：</b></th>
+                        <td>廊坊益津检测技术有限公司</td>
+                        <th><b>所属行政区：</b></th>
+                        <td>河北省-廊坊市-霸州市</td>
+                    </tr>
+
+                    <tr>
+                        <th><b>单位地址：</b></th>
+                        <td colspan="3">河北廊坊市霸州市火车站与朝阳路交叉口北行400米路西</td>
+                        <th><b>所属行业：</b></th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th><b>联系人：</b></th>
+                        <td>张颖</td>
+                        <th><b>手机：</b></th>
+                        <td>15100677175</td>
+                        <th><b>联系电话：</b></th>
+                        <td>/</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="tablecontent">
+            <div class="tabletitle">
+                <span style="font-size:12px;padding-right:5px;float:left; opacity:0.3">▶&nbsp;&nbsp;</span>监测报告电子版
+            </div>
+            <div class="tablediv">
+                        <a href="http:\\111.62.218.141:21818\/UpLoad/ServerReportPath/9fae3753-98c4-4886-adf1-03558bd33b08.pdf" target="_blank" style="text-decoration-line:none; color:blue;" class="layui-btn layui-btn-normal layui-btn-xs"><i class="layui-icon layui-icon-search" style="color:white;"></i>LFYJ20241251</a>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer">
+        <div class="FooterTop">
+            <div class="cmain" style="text-align:center;color:white;font-weight:100;">
+                版权所有：河北省生态环境厅<br />
+                地址：石家庄裕华西路106号 联系我们：lysoft@126.com  邮编：050051<br />
+                技术支持：成都蓝宇科维科技有限公司 建议使用QQ10.4.2版本以上浏览器，在1366*768分辨率下进行浏览
+                备案号：冀ICP备20007746号
+            </div>
+        </div>
+  
+    </div>
+</footer>
